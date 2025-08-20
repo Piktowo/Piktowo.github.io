@@ -1,109 +1,66 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
+<!DOCTYPE html><html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Piktowo · Landing</title>
-  <meta name="description" content="Anime fans / Linuxer / Geek">
-  <meta name="color-scheme" content="light dark">
-  <style>
-    :root{
-      --bg:#0b0f14; --fg:#e6edf3; --muted:#97a2b0;
-      --card:#0f141b; --b:#1b2430; --accent:#63b3ed; --accent2:#7bd88f;
-      --shadow:0 14px 40px rgba(0,0,0,.28);
-    }
-    @media (prefers-color-scheme:light){
-      :root{--bg:#f6f8fa; --fg:#0f172a; --muted:#5b6a82; --card:#fff; --b:#e8edf3}
-    }
-    *{box-sizing:border-box} html,body{height:100%}
-    body{
-      margin:0; background:
-        radial-gradient(1100px 600px at 95% -10%, rgba(99,179,237,.12), transparent 60%),
-        radial-gradient(900px 500px at 0% 0%, rgba(123,216,143,.10), transparent 55%),
-        var(--bg);
-      color:var(--fg); font:16px/1.65 ui-sans-serif,system-ui,Segoe UI,Inter,Roboto,Arial;
-      display:grid; place-items:center; padding:22px;
-    }
-    .card{
-      width:min(680px,100%); background:
-        linear-gradient(180deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.10); border-radius:22px; padding:28px 22px 24px;
-      box-shadow:var(--shadow); backdrop-filter:saturate(120%) blur(4px); text-align:center;
-    }
-    /* 头像 + 渐变描边 */
-    .avatar-wrap{width:120px; height:120px; margin:2px auto 10px; position:relative}
-    .ring{
-      position:absolute; inset:-4px; border-radius:50%;
-      background:conic-gradient(from 210deg,var(--accent),var(--accent2),var(--accent));
-      -webkit-mask: radial-gradient(farthest-side, transparent 70px, #000 71px);
-              mask: radial-gradient(farthest-side, transparent 70px, #000 71px);
-      filter:saturate(130%);
-      opacity:.9;
-    }
-    .avatar{
-      width:120px; height:120px; border-radius:50%; object-fit:cover; display:block;
-      border:1px solid rgba(255,255,255,.18); box-shadow:0 10px 30px rgba(0,0,0,.22);
-    }
-    h1{margin:6px 0 4px; font-size:34px; letter-spacing:.2px}
-    .sub{margin:0 0 14px; color:var(--muted)}
-    .tags{display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:8px 0 18px}
-    .tag{padding:6px 10px; border-radius:999px; border:1px solid var(--b); background:rgba(255,255,255,.04); color:var(--muted); font-size:13px}
-
-    .links{display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin:4px 0 6px}
-    .chip{
-      display:inline-flex; align-items:center; gap:8px; padding:11px 16px;
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border:1px solid rgba(255,255,255,.10); border-radius:14px; text-decoration:none; color:var(--fg);
-      transition:.18s transform, .18s box-shadow;
-    }
-    .chip:hover{ transform:translateY(-2px); box-shadow:0 12px 26px rgba(0,0,0,.18) }
-    .chip svg{width:18px;height:18px}
-
-    footer{margin-top:14px; color:var(--muted); font-size:13px}
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Piktowo</title>  <!-- GitHub Pages 友好：全部使用相对路径或外链；不依赖根路径 -->  <meta name="theme-color" content="#f4f7f6" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />  <!-- OG 基础 -->  <meta property="og:title" content="Piktowo" />
+  <meta property="og:description" content="都是鱼肉 只是砧板不同罢了" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Piktowo" />
+  <meta property="og:url" content="https://piktowo.github.io/" />
+  <meta name="description" content="Piktowo · Anime fans / Linuxer / Geek" />
+  <link rel="canonical" href="https://piktowo.github.io/" />
+  <meta name="color-scheme" content="light dark" />
+  <meta property="og:image" content="https://github.com/Piktowo.png" />  <!-- 图标：使用 love4taylor 域名的资源 -->  <link rel="apple-touch-icon" sizes="180x180" href="https://www.love4taylor.com/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" href="https://www.love4taylor.com/favicon-16x16.png" sizes="16x16" />
+  <link rel="icon" type="image/png" href="https://www.love4taylor.com/favicon-32x32.png" sizes="32x32" />
+  <link rel="shortcut icon" href="https://www.love4taylor.com/favicon.ico" />  <!-- 字体 Cairo 300 -->  <link rel="preload" href="https://lib.baomitu.com/fonts/cairo/cairo-300.woff2" as="font" type="font/woff2" crossorigin />  <!-- 使用外部 CSS -->  <link rel="preconnect" href="https://lib.baomitu.com" crossorigin />
+  <link rel="preconnect" href="https://github.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.sa.net" crossorigin />
+  <link rel="preload" as="image" href="https://github.com/Piktowo.png" fetchpriority="high" />
+  <link rel="preload" as="image" href="https://cdn.sa.net/2024/02/16/E7mpJIbYvRySVah.jpg" />
+  <link rel="stylesheet" href="https://www.love4taylor.com/main.min.css" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; img-src 'self' https: data:; style-src 'self' https: 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <noscript><style>body #loader{display:none!important}</style></noscript>
 </head>
 <body>
-  <main class="card" role="main" aria-label="profile">
-
-    <!-- 头像（点头像跳 GitHub） -->
-    <a href="https://github.com/piktowo" target="_blank" rel="noreferrer" class="avatar-wrap" aria-label="GitHub">
-      <span class="ring" aria-hidden="true"></span>
-      <img class="avatar" src="https://github.com/piktowo.png?size=480" alt="Piktowo avatar" loading="lazy">
-    </a>
-
-    <h1>Piktowo</h1>
-    <p class="sub">Anime fans / Linuxer / Geek</p>
-
-    <!-- 小标签，可改成你的定位/兴趣/状态 -->
-    <div class="tags">
-      <span class="tag">Android · Termux</span>
-      <span class="tag">Shell / Lua</span>
-      <span class="tag">Material You</span>
-      <span class="tag">现在：折腾 GitHub Pages</span>
+  <div id="loader">
+    <div class="spinner">
+      <div class="double-bounce1"></div>
+      <div class="double-bounce2"></div>
     </div>
-
-    <!-- 只保留 电报 / GitHub / 邮件 -->
-    <nav class="links" aria-label="links">
-      <a class="chip" href="https://t.me/Cisurm" target="_blank" rel="noreferrer">
-        <!-- Telegram -->
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21.5 4.2L3.4 11.7c-.9.4-.9 1.1-.2 1.3l4.5 1.4 1.8 5.7c.2.5.4.7.8.7.4 0 .6-.2.8-.5l2.7-2.6 4.4 3.2c.8.4 1.3.2 1.5-.8l2.7-12.6c.3-1.2-.4-1.7-1.4-1.3z" fill="currentColor"/></svg>
-        Telegram
-      </a>
-      <a class="chip" href="https://github.com/piktowo" target="_blank" rel="noreferrer">
-        <!-- GitHub -->
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 .9a11 11 0 0 0-3.5 21.5c.6.1.8-.3.8-.6v-2.2c-3.4.8-4.1-1.6-4.1-1.6-.6-1.4-1.4-1.8-1.4-1.8-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1.1 1.8 2.9 1.3 3.6 1 .1-.8.4-1.3.7-1.6-2.7-.3-5.6-1.4-5.6-6.3 0-1.4.5-2.5 1.2-3.4-.1-.3-.5-1.7.1-3.5 0 0 1-.3 3.4 1.3a11.7 11.7 0 0 1 6.1 0c2.5-1.6 3.4-1.3 3.4-1.3.6 1.8.2 3.2.1 3.5.8.9 1.2 2 1.2 3.4 0 4.9-2.9 6-5.6 6.3.5.4.8 1.1.8 2.2v3.2c0 .3.2.7.8.6A11 11 0 0 0 12 .9z" fill="currentColor"/></svg>
-        GitHub
-      </a>
-      <a class="chip" href="Piktowo@gmail.com">
-        <!-- Email -->
-        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M3.5 6h17a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 20.5 18h-17A1.5 1.5 0 0 1 2 16.5v-9A1.5 1.5 0 0 1 3.5 6z" stroke="currentColor" stroke-width="1.4"/><path d="M4 7.5l8 6 8-6" stroke="currentColor" stroke-width="1.4" fill="none"/></svg>
-        Email
-      </a>
-    </nav>
-
-    <footer>© <span id="y"></span> Piktowo · Made with GitHub Pages</footer>
-  </main>
-
-  <script>document.getElementById('y').textContent=new Date().getFullYear();</script>
-</body>
+  </div>  <main id="wrapper" class="container">
+    <section class="card" id="card--user">
+      <header>
+        <div id="background">
+          <div id="background--image" style="background-image:url(https://cdn.sa.net/2024/02/16/E7mpJIbYvRySVah.jpg)"></div>
+        </div>
+        <figure class="avatar" aria-label="头像">
+          <img src="https://github.com/Piktowo.png" alt="Piktowo avatar" width="460" height="460" loading="eager" decoding="async" fetchpriority="high" />
+        </figure>
+      </header>
+      <section class="info">
+        <h1 class="name">Piktowo</h1>
+        <p class="bio">Anime fans / Linuxer / Geek</p>
+      </section>
+      <footer class="social-links">
+        <a href="https://github.com/Piktowo" target="_blank" rel="me noopener" class="github">
+          <svg class="icon"><use xlink:href="#icon-github"></use></svg><span>GitHub</span>
+        </a>
+        <a href="https://t.me/Cisurm" target="_blank" rel="me noopener" class="telegram">
+          <svg class="icon"><use xlink:href="#icon-telegram"></use></svg><span>Telegram</span>
+        </a>
+      </footer>
+    </section>
+  </main>  <!-- Icons Sprite -->
+  <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <symbol id="icon-github" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-.609.109-.828-.266-.828-.578 0-.391.016-1.687.016-3.297 0-1.125-.375-1.844-.812-2.219 2.672-.297 5.484-1.313 5.484-5.922 0-1.313-.469-2.375-1.234-3.219.125-.313.531-1.531-.125-3.187-1-.313-3.297 1.234-3.297 1.234-.953-.266-1.984-.406-3-.406s-2.047.141-3 .406c0 0-2.297-1.547-3.297-1.234-.656 1.656-.25 2.875-.125 3.187-.766.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-.344.313-.656.844-.766 1.609-.688.313-2.438.844-3.484-1-.656-1.141-1.844-1.234-1.844-1.234-1.172-.016-.078.734-.078.734.781.359 1.328 1.75 1.328 1.75.703 2.141 4.047 1.422 4.047 1.422 0 1 .016 1.937.016 2.234 0 .313-.219.688-.828.578C3.031 25.797-.406 21.297-.406 16c0-6.625 5.375-12 12-12z"/></symbol>
+    <symbol id="icon-telegram" viewBox="0 0 28 28"><path d="M18.578 20.422l2.297-10.828c.203-.953-.344-1.328-.969-1.094l-13.5 5.203c-.922.359-.906.875-.156 1.109l3.453 1.078 8.016-5.047c.375-.25.719-.109.438.141l-6.484 5.859-.25 3.563c.359 0 .516-.156.703-.344l1.687-1.625 3.5 2.578c.641.359 1.094.172 1.266-.594zM28 14c0 7.734-6.266 14-14 14S0 21.734 0 14 6.266 0 14 0s14 6.266 14 14z"/></symbol>
+  </svg>  <script>
+        if ("addEventListener" in window) {
+      window.addEventListener("load", function(){ document.body.classList.add("loaded"); });
+    }
+  </script></body>
 </html>
