@@ -318,9 +318,46 @@
     }
 
     @media (max-width: 520px) {
+      .container {
+        padding: 28px 14px 40px;
+      }
+
+      .card {
+        width: 100%;
+      }
+
+      .card header {
+        height: clamp(180px, 52vw, 240px);
+      }
+
+      .avatar {
+        bottom: -36px;
+        width: clamp(76px, 24vw, 110px);
+        height: clamp(76px, 24vw, 110px);
+      }
+
+      .info {
+        padding-top: 52px;
+      }
+
+      .name {
+        font-size: clamp(22px, 6vw, 30px);
+      }
+
+      .time {
+        font-size: 12px;
+        padding: 6px 10px;
+      }
+
       .social-links {
         flex-direction: column;
-        align-items: flex-start;
+        align-items: stretch;
+        padding: 14px 18px 24px;
+      }
+
+      .social-links a {
+        justify-content: center;
+        width: 100%;
       }
     }
   </style>
