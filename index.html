@@ -1,66 +1,448 @@
-<!DOCTYPE html><html lang="zh-CN">
+<!DOCTYPE html>
+<html lang="zh-CN">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Piktowo</title>  <!-- GitHub Pages 友好：全部使用相对路径或外链；不依赖根路径 -->  <meta name="theme-color" content="#f4f7f6" />
+  <title>Piktowo</title>
+  <!-- GitHub Pages 友好：全部使用相对路径或外链；不依赖根路径 -->
+  <meta name="theme-color" content="#f4f7f6" />
   <meta name="mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />  <!-- OG 基础 -->  <meta property="og:title" content="Piktowo" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="color-scheme" content="light dark" />
+  <meta name="description" content="Piktowo · Anime fans / Linuxer / Geek" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <!-- OG 基础 -->
+  <meta property="og:title" content="Piktowo" />
   <meta property="og:description" content="都是鱼肉 只是砧板不同罢了" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Piktowo" />
   <meta property="og:url" content="https://piktowo.github.io/" />
-  <meta name="description" content="Piktowo · Anime fans / Linuxer / Geek" />
+  <meta property="og:image" content="https://github.com/Piktowo.png" />
+
   <link rel="canonical" href="https://piktowo.github.io/" />
-  <meta name="color-scheme" content="light dark" />
-  <meta property="og:image" content="https://github.com/Piktowo.png" />  <!-- 图标：使用 love4taylor 域名的资源 -->  <link rel="apple-touch-icon" sizes="180x180" href="https://www.love4taylor.com/apple-touch-icon.png" />
-  <link rel="icon" type="image/png" href="https://www.love4taylor.com/favicon-16x16.png" sizes="16x16" />
-  <link rel="icon" type="image/png" href="https://www.love4taylor.com/favicon-32x32.png" sizes="32x32" />
-  <link rel="shortcut icon" href="https://www.love4taylor.com/favicon.ico" />  <!-- 字体 Cairo 300 -->  <link rel="preload" href="https://lib.baomitu.com/fonts/cairo/cairo-300.woff2" as="font" type="font/woff2" crossorigin />  <!-- 使用外部 CSS -->  <link rel="preconnect" href="https://lib.baomitu.com" crossorigin />
+
+
+  <!-- 字体 Cairo 300 -->
+  <link rel="preload" href="https://lib.baomitu.com/fonts/cairo/cairo-300.woff2" as="font" type="font/woff2" crossorigin />
+
+  <!-- 连接预热 -->
+  <link rel="preconnect" href="https://lib.baomitu.com" crossorigin />
   <link rel="preconnect" href="https://github.com" crossorigin />
   <link rel="preconnect" href="https://cdn.sa.net" crossorigin />
+  <link rel="preconnect" href="https://www.love4taylor.com" crossorigin />
+
+  <!-- 关键资源预载 -->
   <link rel="preload" as="image" href="https://github.com/Piktowo.png" fetchpriority="high" />
-  <link rel="preload" as="image" href="https://cdn.sa.net/2024/02/16/E7mpJIbYvRySVah.jpg" />
-  <link rel="stylesheet" href="https://www.love4taylor.com/main.min.css" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; img-src 'self' https: data:; style-src 'self' https: 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
-  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <style>
+    :root {
+      --bg: #0f1115;
+      --card: rgba(19, 22, 28, 0.72);
+      --text: #eef2f7;
+      --muted: #aab3c1;
+      --accent: #5bd1ff;
+      --ring: rgba(91, 209, 255, 0.35);
+      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --radius: 22px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Cairo", system-ui, -apple-system, Segoe UI, sans-serif;
+      background: radial-gradient(1200px 800px at 15% -10%, #1a2331 0%, transparent 60%),
+        radial-gradient(900px 700px at 100% 0%, #1b2937 0%, transparent 55%),
+        var(--bg);
+      color: var(--text);
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    .container {
+      min-height: 100%;
+      display: grid;
+      place-items: center;
+      padding: 48px 20px;
+    }
+
+    .card {
+      position: relative;
+      width: min(880px, 94vw);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px) saturate(120%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      opacity: 0;
+      transform: translateY(14px) scale(0.985);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+
+    .card header {
+      position: relative;
+      height: clamp(220px, 40vw, 340px);
+    }
+
+    #background {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    #background--image {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      filter: saturate(0.95) contrast(1.05);
+      transform: scale(1.02);
+      transition: filter .5s ease;
+    }
+
+    #background--image.bg-ready {
+      filter: saturate(1.05) contrast(1.1);
+    }
+
+    .card header::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,0.25) 0%, rgba(15,17,21,0.7) 65%, rgba(15,17,21,0.95) 100%);
+    }
+
+    .avatar {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: -42px;
+      margin: 0;
+      width: clamp(84px, 18vw, 124px);
+      height: clamp(84px, 18vw, 124px);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 4px solid rgba(255, 255, 255, 0.85);
+      box-shadow:
+        0 12px 30px rgba(0,0,0,0.35),
+        0 0 18px rgba(145, 92, 255, 0.45),
+        0 0 36px rgba(145, 92, 255, 0.25);
+      z-index: 2;
+      background: #111;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .info {
+      padding: clamp(56px, 8vw, 78px) clamp(22px, 5vw, 42px) 18px;
+      text-align: center;
+    }
+
+    .name {
+      margin: 2px 0 6px;
+      font-size: clamp(24px, 3.2vw, 34px);
+      letter-spacing: 0.2px;
+    }
+
+
+    .time {
+      margin-top: 12px;
+      font-size: 13px;
+      letter-spacing: 0.4px;
+      text-transform: uppercase;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .time .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #7ee787;
+      box-shadow: 0 0 8px rgba(126, 231, 135, 0.6);
+    }
+
+    .social-links {
+      display: flex;
+      gap: 14px;
+      padding: 16px clamp(22px, 5vw, 42px) 30px;
+      justify-content: center;
+    }
+
+    .social-links a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: var(--text);
+      text-decoration: none;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: transform .2s ease, border-color .2s ease, background .2s ease;
+      position: relative;
+    }
+
+    .social-links a:hover {
+      transform: translateY(-2px);
+      border-color: var(--ring);
+      background: rgba(91, 209, 255, 0.12);
+    }
+
+    .social-links a:hover::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: inherit;
+      box-shadow: 0 0 18px rgba(91, 209, 255, 0.25);
+      animation: pulse 1.6s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.2; }
+      50% { opacity: 0.6; }
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      fill: currentColor;
+    }
+
+    #loader {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background: #0f1115;
+      z-index: 999;
+      transition: opacity .3s ease, visibility .3s ease;
+    }
+
+    body.loaded #loader {
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    body.loaded .card {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    #fx-layer {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    #fx-layer::before,
+    #fx-layer::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 50%;
+      filter: blur(40px);
+      opacity: 0.35;
+      animation: float 14s ease-in-out infinite;
+      background: radial-gradient(circle at 30% 30%, rgba(91, 209, 255, 0.25), transparent 60%);
+    }
+
+    #fx-layer::before {
+      left: -120px;
+      top: 10%;
+    }
+
+    #fx-layer::after {
+      right: -140px;
+      bottom: 8%;
+      animation-delay: -6s;
+      background: radial-gradient(circle at 60% 40%, rgba(126, 231, 135, 0.18), transparent 60%);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) translateX(0); }
+      50% { transform: translateY(-18px) translateX(10px); }
+    }
+
+    #particle-canvas {
+      display: none;
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      position: relative;
+    }
+
+    .double-bounce1, .double-bounce2 {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      background-color: var(--accent);
+      opacity: 0.6;
+      position: absolute;
+      top: 0;
+      left: 0;
+      animation: bounce 2s infinite ease-in-out;
+    }
+
+    .double-bounce2 {
+      animation-delay: -1s;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: scale(0); }
+      50% { transform: scale(1); }
+    }
+
+    @media (max-width: 520px) {
+      .social-links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self' https:; img-src 'self' https: data:; style-src 'self' https: 'unsafe-inline'; script-src 'self' 'unsafe-inline'; connect-src 'self' https:; frame-ancestors 'none'; upgrade-insecure-requests">
   <noscript><style>body #loader{display:none!important}</style></noscript>
 </head>
 <body>
-  <div id="loader">
+  <div id="loader" aria-hidden="true">
     <div class="spinner">
       <div class="double-bounce1"></div>
       <div class="double-bounce2"></div>
     </div>
-  </div>  <main id="wrapper" class="container">
+  </div>
+
+  <div id="fx-layer" aria-hidden="true"></div>
+
+  <main id="wrapper" class="container">
     <section class="card" id="card--user">
       <header>
         <div id="background">
-          <div id="background--image" style="background-image:url(https://cdn.sa.net/2024/02/16/E7mpJIbYvRySVah.jpg)"></div>
+          <video
+            id="background--image"
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="none"
+            aria-hidden="true"
+            poster="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='18' viewBox='0 0 32 18'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%23181b1f'/%3E%3Cstop offset='1' stop-color='%232b3037'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='32' height='18' fill='url(%23g)'/%3E%3C/svg%3E)"
+          >
+            <source src="bg/bg.mp4" type="video/mp4" />
+          </video>
         </div>
         <figure class="avatar" aria-label="头像">
-          <img src="https://github.com/Piktowo.png" alt="Piktowo avatar" width="460" height="460" loading="eager" decoding="async" fetchpriority="high" />
+          <img
+            src="https://github.com/Piktowo.png"
+            alt="Piktowo avatar"
+            width="240"
+            height="240"
+            loading="eager"
+            decoding="async"
+            fetchpriority="high"
+          />
         </figure>
       </header>
+
       <section class="info">
         <h1 class="name">Piktowo</h1>
-        <p class="bio">Anime fans / Linuxer / Geek</p>
+        <div class="time" id="local-time" aria-label="新加坡时间">
+          <span class="dot" aria-hidden="true"></span>
+          <span>Singapore Time <span id="time-text">--:--</span></span>
+        </div>
       </section>
-      <footer class="social-links">
-        <a href="https://github.com/Piktowo" target="_blank" rel="me noopener" class="github">
-          <svg class="icon"><use xlink:href="#icon-github"></use></svg><span>GitHub</span>
+
+      <footer class="social-links" aria-label="社交链接">
+        <a href="https://github.com/Piktowo" target="_blank" rel="me noopener noreferrer" class="github" aria-label="GitHub">
+          <svg class="icon" aria-hidden="true"><use xlink:href="#icon-github"></use></svg>
+          <span>GitHub</span>
         </a>
-        <a href="https://t.me/Cisurm" target="_blank" rel="me noopener" class="telegram">
-          <svg class="icon"><use xlink:href="#icon-telegram"></use></svg><span>Telegram</span>
+        <a href="https://t.me/ooowakeup" target="_blank" rel="me noopener noreferrer" class="telegram" aria-label="Telegram">
+          <svg class="icon" aria-hidden="true"><use xlink:href="#icon-telegram"></use></svg>
+          <span>Telegram</span>
+        </a>
+        <a href="https://discord.gg/f3XjjjYT" target="_blank" rel="me noopener noreferrer" class="discord" aria-label="Discord">
+          <svg class="icon" aria-hidden="true"><use xlink:href="#icon-discord"></use></svg>
+          <span>Discord</span>
         </a>
       </footer>
     </section>
-  </main>  <!-- Icons Sprite -->
+  </main>
+
+  <!-- Icons Sprite -->
   <svg style="position:absolute;width:0;height:0;overflow:hidden" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-    <symbol id="icon-github" viewBox="0 0 24 28"><path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-.609.109-.828-.266-.828-.578 0-.391.016-1.687.016-3.297 0-1.125-.375-1.844-.812-2.219 2.672-.297 5.484-1.313 5.484-5.922 0-1.313-.469-2.375-1.234-3.219.125-.313.531-1.531-.125-3.187-1-.313-3.297 1.234-3.297 1.234-.953-.266-1.984-.406-3-.406s-2.047.141-3 .406c0 0-2.297-1.547-3.297-1.234-.656 1.656-.25 2.875-.125 3.187-.766.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-.344.313-.656.844-.766 1.609-.688.313-2.438.844-3.484-1-.656-1.141-1.844-1.234-1.844-1.234-1.172-.016-.078.734-.078.734.781.359 1.328 1.75 1.328 1.75.703 2.141 4.047 1.422 4.047 1.422 0 1 .016 1.937.016 2.234 0 .313-.219.688-.828.578C3.031 25.797-.406 21.297-.406 16c0-6.625 5.375-12 12-12z"/></symbol>
-    <symbol id="icon-telegram" viewBox="0 0 28 28"><path d="M18.578 20.422l2.297-10.828c.203-.953-.344-1.328-.969-1.094l-13.5 5.203c-.922.359-.906.875-.156 1.109l3.453 1.078 8.016-5.047c.375-.25.719-.109.438.141l-6.484 5.859-.25 3.563c.359 0 .516-.156.703-.344l1.687-1.625 3.5 2.578c.641.359 1.094.172 1.266-.594zM28 14c0 7.734-6.266 14-14 14S0 21.734 0 14 6.266 0 14 0s14 6.266 14 14z"/></symbol>
-  </svg>  <script>
-        if ("addEventListener" in window) {
-      window.addEventListener("load", function(){ document.body.classList.add("loaded"); });
+    <symbol id="icon-github" viewBox="0 0 24 28">
+      <path d="M12 2c6.625 0 12 5.375 12 12 0 5.297-3.437 9.797-8.203 11.391-.609.109-.828-.266-.828-.578 0-.391.016-1.687.016-3.297 0-1.125-.375-1.844-.812-2.219 2.672-.297 5.484-1.313 5.484-5.922 0-1.313-.469-2.375-1.234-3.219.125-.313.531-1.531-.125-3.187-1-.313-3.297 1.234-3.297 1.234-.953-.266-1.984-.406-3-.406s-2.047.141-3 .406c0 0-2.297-1.547-3.297-1.234-.656 1.656-.25 2.875-.125 3.187-.766.844-1.234 1.906-1.234 3.219 0 4.594 2.797 5.625 5.469 5.922-.344.313-.656.844-.766 1.609-.688.313-2.438.844-3.484-1-.656-1.141-1.844-1.234-1.844-1.234-1.172-.016-.078.734-.078.734.781.359 1.328 1.75 1.328 1.75.703 2.141 4.047 1.422 4.047 1.422 0 1 .016 1.937.016 2.234 0 .313-.219.688-.828.578C3.031 25.797-.406 21.297-.406 16c0-6.625 5.375-12 12-12z"/>
+    </symbol>
+    <symbol id="icon-telegram" viewBox="0 0 28 28">
+      <path d="M18.578 20.422l2.297-10.828c.203-.953-.344-1.328-.969-1.094l-13.5 5.203c-.922.359-.906.875-.156 1.109l3.453 1.078 8.016-5.047c.375-.25.719-.109.438.141l-6.484 5.859-.25 3.563c.359 0 .516-.156.703-.344l1.687-1.625 3.5 2.578c.641.359 1.094.172 1.266-.594zM28 14c0 7.734-6.266 14-14 14S0 21.734 0 14 6.266 0 14 0s14 6.266 14 14z"/>
+    </symbol>
+    <symbol id="icon-discord" viewBox="0 0 24 24">
+      <path d="M19.54 4.5A19.63 19.63 0 0 0 14.8 3a13.7 13.7 0 0 0-.64 1.32 18.53 18.53 0 0 0-4.32 0A13.7 13.7 0 0 0 9.2 3a19.6 19.6 0 0 0-4.74 1.5C2.43 8.2 1.88 11.8 2.1 15.34A19.8 19.8 0 0 0 7 18.8c.39-.53.73-1.1 1.03-1.7-.57-.22-1.11-.49-1.63-.8.14-.1.28-.2.41-.31 3.16 1.49 6.6 1.49 9.72 0 .14.12.27.22.41.31-.52.31-1.06.58-1.63.8.3.6.64 1.17 1.03 1.7a19.8 19.8 0 0 0 4.9-3.46c.28-4.08-.48-7.64-2.7-10.34ZM8.75 13.75c-.78 0-1.41-.73-1.41-1.63 0-.9.62-1.63 1.41-1.63s1.42.73 1.41 1.63c0 .9-.62 1.63-1.41 1.63Zm6.5 0c-.78 0-1.41-.73-1.41-1.63 0-.9.62-1.63 1.41-1.63s1.42.73 1.41 1.63c0 .9-.62 1.63-1.41 1.63Z"/>
+    </symbol>
+  </svg>
+
+  <script>
+    if ("addEventListener" in window) {
+      window.addEventListener("load", function () {
+        document.body.classList.add("loaded");
+      });
     }
-  </script></body>
+
+    (function () {
+      var bgVideo = document.getElementById("background--image");
+      if (!bgVideo || bgVideo.tagName !== "VIDEO") return;
+      setTimeout(function () {
+        var playPromise = bgVideo.play();
+        if (playPromise && playPromise.catch) playPromise.catch(function () {});
+      }, 400);
+      bgVideo.addEventListener("canplay", function () {
+        bgVideo.classList.add("bg-ready");
+      }, { once: true });
+    })();
+
+    (function () {
+      var el = document.getElementById("time-text");
+      if (!el) return;
+      function tick() {
+        var now = new Date();
+        var fmt = new Intl.DateTimeFormat("en-SG", {
+          timeZone: "Asia/Singapore",
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false
+        });
+        el.textContent = fmt.format(now);
+      }
+      tick();
+      setInterval(tick, 5000);
+    })();
+
+  </script>
+</body>
 </html>
